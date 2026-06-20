@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坦克大战 - Tank Battle</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div id="ui-layer">
+            <div id="hud">
+                <span id="score">分数: 0</span>
+                <span id="lives">生命: 3</span>
+                <span id="level">关卡: 1</span>
+                <span id="enemies">敌人: 0</span>
+            </div>
+            <div id="menu" class="screen active">
+                <h1>坦克大战</h1>
+                <p class="subtitle">Tank Battle HTML5</p>
+                <div class="controls-info">
+                    <p><strong>操作方式：</strong></p>
+                    <p>WASD / 方向键：移动坦克</p>
+                    <p>空格键：射击</p>
+                    <p>P：暂停游戏</p>
+                    <p>R：重新开始</p>
+                </div>
+                <button id="startBtn" class="btn">开始游戏</button>
+            </div>
+            <div id="pause" class="screen">
+                <h2>游戏暂停</h2>
+                <p>按 P 继续游戏</p>
+                <button id="resumeBtn" class="btn">继续</button>
+            </div>
+            <div id="gameover" class="screen">
+                <h2>游戏结束</h2>
+                <p id="finalScore">最终分数: 0</p>
+                <button id="restartBtn" class="btn">重新开始</button>
+            </div>
+            <div id="victory" class="screen">
+                <h2>恭喜通关！</h2>
+                <p id="victoryScore">最终分数: 0</p>
+                <button id="playAgainBtn" class="btn">再玩一次</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/tank.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
