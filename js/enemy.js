@@ -41,10 +41,6 @@ class EnemyTank extends Tank {
                     this.moveTimer = 0;
                 }
             }
-            // 看到玩家时开火
-            if (this.canShoot()) {
-                this.shoot();
-            }
         } else {
             // 巡逻模式
             if (this.moveTimer >= this.changeDirTime) {

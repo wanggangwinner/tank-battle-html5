@@ -81,6 +81,10 @@ class Game {
         this.enemiesToSpawn = this.enemySpawnQueue.length;
         this.enemySpawnTimer = 0;
 
+        // 立刻生成第一批敌人，避免开局空屏
+        this.spawnEnemy();
+        this.spawnEnemy();
+
         this.updateHUD();
     }
 
@@ -142,8 +146,6 @@ class Game {
     }
 
     update(dt) {
-        this.input.update();
-
         if (this.input.isPausePressed()) {
             if (this.state === 'PLAYING') {
                 this.state = 'PAUSED';
@@ -239,15 +241,6 @@ class Game {
             // 刚被击中时由 takeDamage 触发，这里不需要额外处理
         }
 
-        // 检查基地被毁
-        if (this.gameMap.base) {
-            const baseX = this.gameMap.base.c * TILE_SIZE;
-            const baseY = this.gameMap.base.r * TILE_SIZE;
-            if (this.player.alive && rectsOverlap(this.player.x, this.player.y, this.player.width, this.player.height, baseX, baseY, TILE_SIZE, TILE_SIZE)) {
-                // 玩家可以穿过基地
-            }
-        }
-
         // 检查关卡完成
         if (this.enemiesToSpawn <= 0 && this.enemies.length === 0) {
             this.levelIndex++;
@@ -299,9 +292,14 @@ class Game {
         const dt = Math.min((timestamp - this.lastTime) / 1000, 0.05);
         this.lastTime = timestamp;
 
-        this.update(dt);
-        this.draw();
+        try {
+            this.update(dt);
+            this.draw();
+        } catch (err) {
+            console.error('游戏运行错误:', err);
+        }
 
+        this.input.update();
         requestAnimationFrame(this.boundLoop);
     }
 }

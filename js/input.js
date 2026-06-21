@@ -23,13 +23,11 @@ class InputHandler {
     }
 
     isPressed(code) {
-        const pressed = this.keys[code] && !this.lastKeys[code];
-        this.lastKeys[code] = this.keys[code];
-        return pressed;
+        return !!this.keys[code] && !this.lastKeys[code];
     }
 
     update() {
-        // 在帧末同步 lastKeys，避免同一帧内多个 isPressed 调用状态不一致
+        // 在帧末同步 lastKeys，供下一帧检测按键按下事件
         for (const code in this.keys) {
             this.lastKeys[code] = this.keys[code];
         }
